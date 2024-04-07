@@ -220,14 +220,14 @@ fn push(args: &Vec<Data>) -> Data {
             let mut x = value.clone();
             dbg!(&args);
             let n = match &args[1] {
-                Data::List { value, sub_type } => Node {
+                Data::List { value: _, sub_type } => Node {
                     id: 0,
                     data: Data::Type {
                         name: stringify_enum(&args[1]),
                     },
                     nodes: sub_type.to_vec(),
                 },
-                Data::Type { name } => Node {
+                Data::Type { name: _ } => Node {
                     id: 0,
                     data: args[1].clone(),
                     nodes: [].to_vec(),
@@ -1076,7 +1076,16 @@ impl Interpreter {
                             };
                             expression.nodes.push(node.clone());
                             println!("{}", self.eval_expression(expression))
-                        }
+                        },
+                        Data::Function { body: _, params: _, param_types: _, return_types: _ } => {
+                            let mut expression = Node {
+                                id: 0,
+                                data: Data::Expression,
+                                nodes: Vec::new(),
+                            };
+                            expression.nodes.push(node.clone());
+                            println!("{}", self.eval_expression(expression))
+                        },
                         _ => {}
                     };
                 }

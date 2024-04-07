@@ -21,7 +21,8 @@ Scoped blocks are defined by curly braces in Kraber. Accessing a local variable 
 ```
 declare x as whole
 set x to 0
-while lt(x 4) {
+while lt(x 4)
+{
   declare y as whole
   set x to add(x 1)
   set y to multiply(x 2)
@@ -108,7 +109,8 @@ while x
 declare factorial as function
 set factorial to fun (n as whole) as whole
 {
-  while equal(n 0) {
+  while lt(n 2)
+  {
     return 1
   }
   return multiply(n factorial(add(n -1)))
